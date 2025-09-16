@@ -1,0 +1,29 @@
+<div class="login-page">
+  <div class="card">
+    <div class="logo-wrap">
+      <img src="assets/logo.png" alt="App Logo" class="logo" />
+      <h2>Project Management</h2>
+    </div>
+
+    <form [formGroup]="loginForm" class="form">
+         <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form"></form> -->
+      <label class="label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="input"
+        placeholder="you@company.com"
+      />
+
+      <label class="label">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="input"
+        placeholder="Enter password"
+      />
+
+      <button type="submit" class="primary-btn">Login</button>
+    </form>
+  </div>
+</div>
