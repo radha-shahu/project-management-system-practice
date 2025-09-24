@@ -1,0 +1,62 @@
+<div class="project-create-layout">
+    <main class="main-content">
+        <div class="project-create-container">
+            <!-- Header Section -->
+            <div class="project-create-header">
+                <h1 class="page-title">Create New Project</h1>
+                <p class="page-subtitle">Fill in the details to create a new project</p>
+            </div>
+
+            <!-- Form Container -->
+            <div class="form-container">
+                <form [formGroup]="projectForm">
+                <div class="form-section">
+                    <h2 class="section-title">Project Information</h2>
+                    <div class="form-field">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Project Name *</mat-label>
+                            <input matInput placeholder="Enter project name" formControlName="projectName">
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field">
+                        <mat-form-field appearance="outline" class="full-width">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Enter project description (optional)" rows="4" formControlName="description"></textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <!-- Project Timeline Section -->
+                <div class="form-section">
+                    <h2 class="section-title">Project Timeline</h2>
+                    
+                    <div class="date-fields">
+                        <div class="form-field">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>Start Date *</mat-label>
+                                <input matInput [matDatepicker]="startPicker" placeholder="Select start date" formControlName="startDate">
+                                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #startPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="form-field">
+                            <mat-form-field appearance="outline" class="full-width">
+                                <mat-label>End Date *</mat-label>
+                                <input matInput [matDatepicker]="endPicker" placeholder="Select end date" formControlName="endDate">
+                                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                                <mat-datepicker #endPicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="form-actions">
+                    <button matButton="tonal" class="cancel-button">Cancel</button>
+                    <button matButton="filled" color="primary" class="create-button" disabled>Create Project</button>
+                </div>
+            </form>
+            </div>
+        </div>
+    </main>
+</div>

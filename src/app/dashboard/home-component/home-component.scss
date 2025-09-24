@@ -1,0 +1,80 @@
+.dashboard-layout {
+  min-height: 100vh;
+  background-color: #f8fafc;
+}
+
+.main-content {
+  margin-left: 280px; // Width of sidebar
+  padding-top: 64px; // Height of header
+  min-height: calc(100vh - 64px);
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 32px;
+}
+
+.dashboard-header {
+  margin-bottom: 48px;
+  text-align: left;
+}
+
+.dashboard-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 12px 0;
+}
+
+.dashboard-subtitle {
+  color: #9ca3af;
+  font-size: 18px;
+  margin: 0;
+  font-weight: 400;
+}
+
+.dashboard-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.create-project-card {
+  background: white;
+  border-radius: 16px;
+  padding: 48px 40px;
+  border: 1px solid #e5e7eb;
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+.folder-icon {
+  font-size: 64px;
+  margin-bottom: 24px;
+  // filter: sepia(1) hue-rotate(45deg) saturate(1.5) brightness(1.1); // Makes folder yellow
+}
+
+.card-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 16px 0;
+}
+
+.card-description {
+  color: #9ca3af;
+  font-size: 16px;
+  margin: 0 0 32px 0;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.create-button {
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+}

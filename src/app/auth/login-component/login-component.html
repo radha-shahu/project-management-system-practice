@@ -1,12 +1,13 @@
 <div class="login-page">
   <div class="card">
     <div class="logo-wrap">
-      <img src="assets/logo.png" alt="App Logo" class="logo" />
+      <!-- <img src="assets/logo.png" alt="App Logo" class="logo" /> -->
       <h2>Project Management</h2>
+      <p class="login-subtitle">Sign in to your account</p>
     </div>
 
-    <form [formGroup]="loginForm" class="form">
-         <!-- <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form"></form> -->
+    <!-- <form [formGroup]="loginForm" class="form"> -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
       <label class="label">Email</label>
       <input
         type="email"
@@ -23,7 +24,7 @@
         placeholder="Enter password"
       />
 
-      <button type="submit" class="primary-btn">Login</button>
+      <button type="submit" class="login-btn">Login</button>
     </form>
   </div>
 </div>

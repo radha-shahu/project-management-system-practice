@@ -1,1 +1,19 @@
-<p>home-component works!</p>
+<div class="dashboard-layout">
+    <main class="main-content">
+        <div class="dashboard-container">
+            <div class="dashboard-header">
+                <h1 class="dashboard-title">Dashboard</h1>
+                <p class="dashboard-subtitle">Welcome to your project management dashboard</p>
+            </div>
+
+            <div class="dashboard-content">
+                <div class="create-project-card">
+                    <div class="folder-icon">📁</div>
+                    <h2 class="card-title">Create New Project</h2>
+                    <p class="card-description">Start a new project and begin managing your tasks</p>
+                    <button matButton="filled" class="create-button" (click)="onCreateProject()">Create Project</button>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
