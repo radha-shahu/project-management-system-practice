@@ -48,6 +48,16 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'team/list',
+    loadComponent: () => import('./team/team-list/team-list').then((m) => m.TeamList),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'team/add',
+    loadComponent: () => import('./team/add-member/add-member').then((m) => m.AddMember),
+    canActivate: [authGuard],
+  },
+  {
     path: '**',
     redirectTo: '/home',
   },

@@ -1,0 +1,41 @@
+<app-header-component></app-header-component>
+<app-sidebar-component></app-sidebar-component>
+<div style="text-align:center">
+    <h1>Add Team Member</h1>
+
+    <form [formGroup]="teamMemberForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label for="name">Name</label>
+            <input id="name" formControlName="name" />
+            <div *ngIf="teamMemberForm.get('name')?.invalid && teamMemberForm.get('name')?.touched">
+                Name is required.
+            </div>
+        </div>
+
+        <div>
+            <label for="email">Email</label>
+            <input id="email" formControlName="email" type="email" />
+            <div *ngIf="teamMemberForm.get('email')?.invalid && teamMemberForm.get('email')?.touched">
+                <div *ngIf="teamMemberForm.get('email')?.errors?.['required']">
+                    Email is required.
+                </div>
+                <div *ngIf="teamMemberForm.get('email')?.errors?.['email']">
+                    Enter a valid email.
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <label for="role">Role</label>
+            <select id="role" formControlName="role">
+                <option value="" disabled>Select Role</option>
+                <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            </select>
+            <div *ngIf="teamMemberForm.get('role')?.invalid && teamMemberForm.get('role')?.touched">
+                Role is required.
+            </div>
+        </div>
+
+        <button type="submit" [disabled]="teamMemberForm.invalid">Add Team Member</button>
+    </form>
+</div>
