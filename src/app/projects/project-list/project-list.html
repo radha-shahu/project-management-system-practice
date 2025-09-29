@@ -40,7 +40,7 @@
           <!-- <fa-icon [icon]=" faMagnifyingGlass"></fa-icon> -->
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="half-width">
           <mat-label>Filter by Status</mat-label>
           <mat-select [(ngModel)]="selectedStatus">
             <mat-option *ngFor="let status of statusOptions" [value]="status">
