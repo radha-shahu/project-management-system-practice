@@ -19,6 +19,7 @@ import { HeaderComponent } from '../../shared/header-component/header-component'
 import { SidebarComponent } from '../../shared/sidebar-component/sidebar-component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Route, Router } from '@angular/router';
+import { minDateGapValidator } from '../../validators/min-date-gap-validator';
 
 @Component({
   selector: 'app-project-create',
@@ -58,7 +59,10 @@ export class ProjectCreate {
       description: ['', []],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
-    });
+    },
+  {
+        validators: minDateGapValidator(2)
+      });
   }
 
   saveProject() {

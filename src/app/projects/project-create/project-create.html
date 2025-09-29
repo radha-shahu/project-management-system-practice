@@ -119,10 +119,12 @@
                   >
                     <div
                       *ngIf="projectForm.get('endDate')?.errors?.['required']"
-                    ></div>
+                    >Please Enter End Date</div>
+                    <!-- <div *ngIf="projectForm.errors?.['minDateGapValidator']"> End date must be at least 2 days after the start date.</div> -->
                   </mat-error>
                 </mat-form-field>
               </div>
+             
             </div>
           </div>
           <!-- Action Buttons -->
@@ -138,6 +140,9 @@
               Create Project
             </button>
           </div>
+           <div class="error-message" *ngIf="projectForm.errors?.['minDateGapValidator'] && (projectForm.dirty || projectForm.touched)">
+    ❌ End date must be at least 2 days after the start date.
+  </div>
         </form>
       </div>
     </div>
