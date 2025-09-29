@@ -55,5 +55,18 @@ export class ProjectDetails {
     this.router.navigate(['/projects'])
   }
 
+  onProjectEdit(id: number) {
+    console.log('project edit id', id);
+    this.router.navigate(['/project/edit', id])
+  }
+
+  onProjectDelete(id: number) {
+    console.log('project delete id', id);
+    const result = this.projectService.deleteProject(id);
+    if (result) {
+      this.router.navigate(['/projects'])
+    }
+  }
+
 
 }

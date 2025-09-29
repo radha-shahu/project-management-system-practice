@@ -17,11 +17,11 @@
                     <h1 class="projects-title">{{projectName}}</h1>
                     <p class="projects-subtitle">Manage and track your projects</p>
                 </div>
-                <button mat-raised-button color="primary" class="create-button">
+                <button mat-raised-button color="primary" class="create-button" (click)="onProjectEdit(projectId)">
                     <fa-icon [icon]="faPenToSquare"></fa-icon>
                     Edit
                 </button>
-                <button mat-raised-button color="primary" class="create-button">
+                <button mat-raised-button color="primary" class="create-button" (click)="onProjectDelete(projectId)">
                     <fa-icon [icon]="faTrash"></fa-icon>
                     Delete
                 </button>
