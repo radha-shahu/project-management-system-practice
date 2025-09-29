@@ -1,11 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-login-component',
-  imports: [CommonModule,ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login-component.html',
   styleUrl: './login-component.scss',
 })
@@ -14,19 +19,27 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
-      email: ['',Validators.required, Validators.email],
-      password: ['',Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+          ),
+        ],
+      ],
     });
-
-
   }
-   onSubmit() {
-      if(this.loginForm.valid){
-        console.log('Login successfull', this.loginForm.value);
-        this.authService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
-      }
-      else{
-        console.log('Login failed',);
-      }
+  onSubmit() {
+    if (this.loginForm.valid) {
+      console.log('Login successfull', this.loginForm.value);
+      this.authService.login(
+        this.loginForm.get('email')?.value,
+        this.loginForm.get('password')?.value
+      );
+    } else {
+      console.log('Login failed');
     }
+  }
 }

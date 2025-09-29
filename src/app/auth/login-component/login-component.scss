@@ -45,7 +45,7 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 12px;
-      margin-top: 15px;
+  margin-top: 15px;
 }
 
 .label {
@@ -79,4 +79,8 @@ h2 {
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
+}
+.login-btn:disabled {
+  color: #979799;
+  background-color: #e3e3e4;
 }

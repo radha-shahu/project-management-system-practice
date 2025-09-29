@@ -1,43 +1,92 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule, FormBuilder} from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  FormBuilder,
+  Validators,
+} from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ProjectService } from '../../core/services/project.service';
+import {
+  ProjectData,
+  ProjectService,
+} from '../../core/services/project.service';
+import { HeaderComponent } from '../../shared/header-component/header-component';
+import { SidebarComponent } from '../../shared/sidebar-component/sidebar-component';
+import { CommonModule, DatePipe } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-project-create',
   imports: [
+    CommonModule,
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    HeaderComponent,
+    SidebarComponent,
   ],
   templateUrl: './project-create.html',
-  styleUrl: './project-create.scss'
+  styleUrl: './project-create.scss',
+  providers: [DatePipe],
 })
 export class ProjectCreate {
   projectForm: FormGroup;
-  constructor(private fb: FormBuilder, private projectService: ProjectService){
+  projectList: ProjectData[] = [];
+  constructor(
+    private fb: FormBuilder,
+    private projectService: ProjectService,
+    private datePipe: DatePipe,
+    private router: Router
+  ) {
     this.projectForm = this.fb.group({
-      projectName:[],
-      description:[],
-      startDate:[],
-      endDate:[]
-    })
+      projectName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(4),
+          Validators.pattern(/^[A-Za-z ]+$/),
+        ],
+      ],
+      description: ['', []],
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
+    });
   }
 
-  saveProject(){
-    const projectName =  this.projectForm.get('email')?.value;
-    const projectDescription =  this.projectForm.get('email')?.value;
-    const projectStartDate =  this.projectForm.get('email')?.value;
-    const projectEndDate =  this.projectForm.get('email')?.value;
-
-    const projectSaveStatus = this.projectService.createProject(projectName, projectStartDate, projectEndDate, projectDescription);
-    
+  saveProject() {
+    const projectName = this.projectForm.get('projectName')?.value;
+    const projectDescription = this.projectForm.get('description')?.value;
+    const projectStartDate = this.projectForm.get('startDate')?.value;
+    const formattedStartDate =
+      this.datePipe.transform(projectStartDate, 'shortDate') ?? '';
+    const projectEndDate = this.projectForm.get('endDate')?.value;
+    const formattedEndDate =
+      this.datePipe.transform(projectEndDate, 'shortDate') ?? '';
+    console.log(
+      'Save Project',
+      projectName,
+      projectDescription,
+      formattedStartDate,
+      formattedEndDate
+    );
+    this.projectService.createProject(
+      projectName,
+      projectDescription,
+      formattedStartDate,
+      formattedEndDate
+    );
+    this.router.navigate(['/projects'])
+  }
+  
+  onCancel(){
+    this.router.navigate(['/home']);
   }
 }

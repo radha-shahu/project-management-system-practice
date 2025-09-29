@@ -6,11 +6,23 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+  authToken:string = 'AUTH_TOKEN';
+
   constructor(private router: Router){}
   
   login(userName: string, password: string): void {
-    if (userName == 'admin' && password == 'admin') {
-      this.router.navigate(['/Home']);
+
+    if (userName == 'admin@a.com' && password == 'Admin@12') {
+      localStorage.setItem('authTokenKey', this.authToken);
+      this.router.navigate(['/home']);
     }
+    
+  }
+  logout(){
+   localStorage.removeItem('authTokenKey');
+  }
+
+  isloggedIn(){
+    return localStorage.getItem('authTokenKey');
   }
 }

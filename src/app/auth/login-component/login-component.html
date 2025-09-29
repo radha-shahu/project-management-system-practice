@@ -6,8 +6,7 @@
       <p class="login-subtitle">Sign in to your account</p>
     </div>
 
-    <!-- <form [formGroup]="loginForm" class="form"> -->
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
       <label class="label">Email</label>
       <input
         type="email"
@@ -15,6 +14,17 @@
         class="input"
         placeholder="you@company.com"
       />
+      <div
+        class="error-message"
+        *ngIf="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+      >
+        <div *ngIf="loginForm.get('email')?.errors?.['required']">Required</div>
+        <div *ngIf="loginForm.get('email')?.errors?.['email']">
+          Please provide valid email
+        </div>
+      </div>
 
       <label class="label">Password</label>
       <input
@@ -23,8 +33,26 @@
         class="input"
         placeholder="Enter password"
       />
-
-      <button type="submit" class="login-btn">Login</button>
+      <div
+        class="error-message"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+      >
+        <div *ngIf="loginForm.get('password')?.errors?.['required']">
+          Required
+        </div>
+        <!-- <div *ngIf="loginForm.get('password')?.errors?.['minlength']">
+          Password must be atleast 5 chars long
+        </div> -->
+        <div *ngIf="loginForm.get('password')?.errors?.['pattern']">
+          Must include uppercase, number, special character (min 8 chars)
+        </div>
+      </div>
+      <button type="submit" class="login-btn" [disabled]="loginForm.invalid">
+        Login
+      </button>
     </form>
   </div>
 </div>

@@ -2,41 +2,51 @@ import { Routes } from '@angular/router';
 import { authGuard } from './core/auth-guard';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/Home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   {
-    path: 'Login',
+    path: 'login',
     loadComponent: () =>
       import('./auth/login-component/login-component').then(
         (m) => m.LoginComponent
       ),
   },
   {
-    path: 'Home',
+    path: 'home',
     loadComponent: () =>
       import('./dashboard/home-component/home-component').then(
         (m) => m.HomeComponent
       ),
-    // canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
-    path: 'Projects',
+    path: 'projects',
     loadComponent: () => import('./projects/projects').then((m) => m.Projects),
-    // canActivate: [authGuard]
+    canActivate: [authGuard],
   },
   {
-    path: 'Project/create',
+    path: 'project/create',
     loadComponent: () =>
       import('./projects/project-create/project-create').then(
         (m) => m.ProjectCreate
       ),
+    canActivate: [authGuard],
   },
   {
-    path: 'Project/list',
+    path: 'project/list',
     loadComponent: () =>
-      import('./projects/project-list/project-list').then((m) => m.ProjectList)
+      import('./projects/project-list/project-list').then((m) => m.ProjectList),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'project/view',
+    loadComponent: () => import('./projects/project-details/project-details').then((m) => m.ProjectDetails)
+  },
+  {
+    path: 'project/edit',
+    loadComponent:() => import('./projects/project-edit/project-edit').then((m) => m.ProjectEdit)
   },
   {
     path: '**',
-    redirectTo: '/Home',
+    redirectTo: '/home',
   },
 ];

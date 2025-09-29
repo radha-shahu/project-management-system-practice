@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { HeaderComponent } from "../../shared/header-component/header-component";
+import { SidebarComponent } from "../../shared/sidebar-component/sidebar-component";
 
 @Component({
   selector: 'app-home-component',
-  imports: [MatButtonModule],
+  imports: [MatButtonModule, HeaderComponent, SidebarComponent],
   templateUrl: './home-component.html',
   styleUrl: './home-component.scss',
 })
@@ -14,6 +16,6 @@ export class HomeComponent {
   }
   onCreateProject() {
     console.log('HomeComponent: Navigating to create project');
-    this.router.navigate(['/Project/create']);
+    this.router.navigate(['/project/create']);
   }
 }
