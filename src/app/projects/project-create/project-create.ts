@@ -41,6 +41,7 @@ import { minDateGapValidator } from '../../validators/min-date-gap-validator';
 export class ProjectCreate {
   projectForm: FormGroup;
   projectList: ProjectData[] = [];
+
   constructor(
     private fb: FormBuilder,
     private projectService: ProjectService,
@@ -53,16 +54,15 @@ export class ProjectCreate {
         [
           Validators.required,
           Validators.minLength(4),
-          Validators.pattern(/^[A-Za-z ]+$/),
-        ],
+          Validators.pattern(/^[A-Za-z ]+$/)
+        ]
       ],
       description: ['', []],
       startDate: ['', [Validators.required]],
-      endDate: ['', [Validators.required]],
-    },
-  {
-        validators: minDateGapValidator(2)
-      });
+      endDate: ['', [Validators.required]]
+    }, {
+      validators: minDateGapValidator(2)
+    });
   }
 
   saveProject() {
@@ -89,8 +89,8 @@ export class ProjectCreate {
     );
     this.router.navigate(['/projects'])
   }
-  
-  onCancel(){
+
+  onCancel() {
     this.router.navigate(['/home']);
   }
 }

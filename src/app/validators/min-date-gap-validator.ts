@@ -15,6 +15,7 @@ export function minDateGapValidator(minimumDays: number): ValidatorFn {
     const diffInTime = endDate.getTime() - startDate.getTime();
     const diffInDays = diffInTime / (1000 * 60 * 60 * 24);
     console.log(diffInDays, 'diff in time');
+
     if (diffInDays < minimumDays) {
       return { minDateGap: true };
     }
