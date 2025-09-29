@@ -68,5 +68,7 @@ export class ProjectDetails {
     }
   }
 
-
+  onAddTeamMember(){
+    this.router.navigate(['/team/assign']);
+  }
 }

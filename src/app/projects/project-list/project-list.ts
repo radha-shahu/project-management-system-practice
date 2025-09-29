@@ -112,4 +112,5 @@ export class ProjectList {
   onCreateProject() {
     this.router.navigate(['/project/create']);
   }
+
 }

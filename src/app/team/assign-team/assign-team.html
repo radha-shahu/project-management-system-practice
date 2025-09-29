@@ -1,0 +1,82 @@
+<app-header-component></app-header-component>
+<app-sidebar-component></app-sidebar-component>
+<div class="projects-layout">
+  <main class="main-content">
+    <div class="team-list-container">
+      <!-- Header Section -->
+      <div class="project-create-header">
+        <div class="team-list-container">
+          <div class="team-list-header">
+            <div class="header-content">
+              <h1 class="team-list-title">Team Members</h1>
+              <p class="team-list-subtitle">
+                Manage and track your team members
+              </p>
+            </div>
+          </div>
+
+          <div class="team-list-table">
+            <table
+              mat-table
+              [dataSource]="dataSource"
+              matSort
+              class="mat-elevation-z8"
+            >
+              <ng-container matColumnDef="name">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  sortActionDescription="Sort by name"
+                >
+                  Name
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="email">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  sortActionDescription="Sort by email"
+                >
+                  Email
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+              </ng-container>
+
+              <ng-container matColumnDef="role">
+                <th
+                  mat-header-cell
+                  *matHeaderCellDef
+                  mat-sort-header
+                  sortActionDescription="Sort by role"
+                >
+                  Role
+                </th>
+                <td mat-cell *matCellDef="let element">{{ element.role }}</td>
+              </ng-container>
+              <ng-container matColumnDef="select">
+                <th mat-header-cell *matHeaderCellDef>Select</th>
+                <td mat-cell *matCellDef="let row">
+                  <mat-checkbox
+                    (click)="$event.stopPropagation()"
+                    [checked]="selection.isSelected(row)"
+                  >
+                  </mat-checkbox>
+                </td>
+              </ng-container>
+              <tr
+                mat-header-row
+                *matHeaderRowDef="displayedColumns"
+                class="header-row"
+              ></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

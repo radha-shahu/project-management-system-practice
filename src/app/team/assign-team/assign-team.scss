@@ -1,0 +1,104 @@
+table {
+        width: 100%;
+    margin-top: 26px;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+}
+
+.team-list-container {
+      margin: 0 auto;
+    padding: 16px 16px;
+}
+.team-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0px;
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    border: 1px solid #e5e7eb;
+}
+
+.header-content {
+    flex: 1;
+}
+
+.team-list-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #374151;
+    margin: 0 0 12px 0;
+}
+
+.team-list-subtitle {
+    color: #9ca3af;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 400;
+}
+
+.add-team-member-button {
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    margin-left: 24px;
+}
+
+
+.no-team-members-section {
+    background: white;
+    border-radius: 16px;
+        padding: 64px 0px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+    margin: 30px 0px;
+}
+
+.folder-icon {
+    font-size: 80px;
+    margin-bottom: 32px;
+}
+
+.no-team-members-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #374151;
+    margin: 0 0 20px 0;
+}
+
+.no-team-members-description {
+    color: #9ca3af;
+    font-size: 18px;
+    margin: 0 0 40px 0;
+    line-height: 1.6;
+    font-weight: 400;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-first-button {
+    padding: 20px 40px;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 12px;
+}
+.table-layout {
+  margin: 0 32px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.header-row {
+  background-color: #bcc1bb;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}

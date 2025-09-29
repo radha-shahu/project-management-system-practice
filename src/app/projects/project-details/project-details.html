@@ -74,7 +74,7 @@
       <mat-card class="team-card">
         <mat-card-header>
           <mat-card-title>
-            <fa-icon [icon]="faUsers"></fa-icon>
+            <!-- <fa-icon [icon]="faUsers"></fa-icon> -->
             Team Members
           </mat-card-title>
           <!-- <mat-card-subtitle>
@@ -106,7 +106,7 @@
               <button
                 mat-raised-button
                 matTooltip="Assign team members to this project"
-                class="add-team-btn"
+                class="add-team-btn" (click)="onAddTeamMember()"
               >
                 <fa-icon [icon]="faUserPlus"></fa-icon>
                 Add Team Members
