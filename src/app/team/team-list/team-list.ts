@@ -8,12 +8,15 @@ import { TeamService } from '../services/team.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'team-list',
   styleUrl: 'team-list.scss',
   templateUrl: 'team-list.html',
-  imports: [MatTableModule, MatSortModule, HeaderComponent, SidebarComponent, CommonModule, FontAwesomeModule],
+  imports: [MatTableModule, MatSortModule, HeaderComponent, SidebarComponent, CommonModule, FontAwesomeModule,
+    MatButtonModule
+  ],
 })
 export class TeamList implements AfterViewInit {
   private _liveAnnouncer = inject(LiveAnnouncer);

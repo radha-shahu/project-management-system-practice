@@ -31,7 +31,7 @@
         font-size: 18px;
         font-weight: 600;
         color: #1a1a1a;
-
+        margin-bottom: 18px;
         .mat-icon {
           color: #007bff;
         }
@@ -41,8 +41,8 @@
     .mat-mdc-card-content {
       .info-grid {
         display: grid;
-        gap: 16px;
-
+        grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+        gap: 24px;
         .info-item {
           display: flex;
           flex-direction: column;
@@ -89,7 +89,7 @@
 
   .mat-mdc-card-content {
     .team-actions {
-     margin: 24px 0px;
+      margin: 24px 0px;
     }
 
     .team-table-section {
@@ -144,4 +144,13 @@
       }
     }
   }
+}
+.add-team-btn {
+  margin-top: 8px;
+}
+.info-status-value {
+  background: #9ce2d2;
+  padding: 2px 23px;
+  width: fit-content;
+  border-radius: 18px;
 }

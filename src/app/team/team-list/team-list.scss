@@ -1,12 +1,16 @@
 table {
-    width: 100%;
+        width: 100%;
+    margin-top: 26px;
 }
 
 th.mat-sort-header-sorted {
     color: black;
 }
 
-
+.team-list-container {
+      margin: 0 auto;
+    padding: 16px 16px;
+}
 .team-list-header {
     display: flex;
     justify-content: space-between;
@@ -48,10 +52,10 @@ th.mat-sort-header-sorted {
 .no-team-members-section {
     background: white;
     border-radius: 16px;
-    padding: 64px 48px;
+        padding: 64px 0px;
     text-align: center;
     border: 1px solid #e5e7eb;
-    margin: 0 32px;
+    margin: 30px 0px;
 }
 
 .folder-icon {
@@ -82,4 +86,19 @@ th.mat-sort-header-sorted {
     font-size: 18px;
     font-weight: 600;
     border-radius: 12px;
+}
+.table-layout {
+  margin: 0 32px;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.header-row {
+  background-color: #bcc1bb;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }

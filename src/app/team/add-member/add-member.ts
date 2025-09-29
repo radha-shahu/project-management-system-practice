@@ -5,16 +5,21 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from "../../shared/header-component/header-component";
 import { SidebarComponent } from "../../shared/sidebar-component/sidebar-component";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'add-member',
     templateUrl: './add-member.html',
     styleUrls: ['./add-member.scss'],
-    imports: [ReactiveFormsModule, CommonModule, HeaderComponent, SidebarComponent]
+    imports: [ReactiveFormsModule, CommonModule, HeaderComponent, SidebarComponent,
+        MatFormFieldModule,MatInputModule, MatSelectModule, MatButtonModule
+    ]
 })
 export class AddMember {
-    roles = ['Scrum Master', 'Product Owner', 'Developer', 'Tester'];
-
+    listOfRoles = ['Scrum Master', 'Product Owner', 'Developer', 'Tester'];
     teamMemberForm: FormGroup;
 
     constructor(private fb: FormBuilder, private teamService: TeamService, private router: Router) {
