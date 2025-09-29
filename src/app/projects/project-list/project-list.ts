@@ -6,6 +6,7 @@ import {
 } from '@angular/core';
 import {
   ProjectData,
+  ProjectService,
 } from '../../core/services/project.service';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { CommonModule } from '@angular/common';
@@ -18,12 +19,12 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { faEllipsisVertical, faEye, faMagnifyingGlass, faPen, faTrash,  } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faEye, faMagnifyingGlass, faPen, faTrash, } from '@fortawesome/free-solid-svg-icons';
 import { MatDateSelectionModel } from '@angular/material/datepicker';
 import { Router } from '@angular/router';
 import { HeaderComponent } from '../../shared/header-component/header-component';
 import { SidebarComponent } from '../../shared/sidebar-component/sidebar-component';
-library.add(faPen, faTrash, faEye,faEllipsisVertical, faMagnifyingGlass);
+library.add(faPen, faTrash, faEye, faEllipsisVertical, faMagnifyingGlass);
 @Component({
   selector: 'app-project-list',
   imports: [
@@ -46,13 +47,13 @@ library.add(faPen, faTrash, faEye,faEllipsisVertical, faMagnifyingGlass);
   styleUrl: './project-list.scss',
 })
 export class ProjectList {
-  constructor(private router : Router){}
+  constructor(private router: Router, private projectService: ProjectService) { }
   faEye = faEye;
-  faPen =faPen;
-  faTrash =faTrash;
-  faMagnifyingGlass =faMagnifyingGlass;
- faEllipsisVertical= faEllipsisVertical
-  @Input() childProjectList: ProjectData[] = [];
+  faPen = faPen;
+  faTrash = faTrash;
+  faMagnifyingGlass = faMagnifyingGlass;
+  faEllipsisVertical = faEllipsisVertical
+  childProjectList: ProjectData[] = [];
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   statusOptions = ['All Status', 'Active', 'Completed'];
@@ -69,25 +70,46 @@ export class ProjectList {
 
   dataSource = new MatTableDataSource(this.childProjectList);
 
+  ngOnInit() {
+    this.fetchProjectsFromStorage();
+  }
+
+  fetchProjectsFromStorage() {
+    this.childProjectList = this.projectService.fetchAllProjects();
+    console.log('fetched prj details', this.childProjectList);
+    this.dataSource.data = this.childProjectList;
+    console.log('fetched prj details', this.dataSource.data);
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['childProjectList']) {
-      this.dataSource.data = this.childProjectList;
-    }
-  }
-  // Sorting
   ngAfterViewInit() {
-    this.dataSource.sort = this.sort; // Connect sort with table
+    this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
   }
-  onProjectView(){
-    this.router.navigate(['/project/view']);
+
+  onProjectView(id: number) {
+    console.log('project view id', id);
+    this.router.navigate(['/project/view', id]);
   }
-  onProjectEdit(){
-    this.router.navigate(['/project/edit'])
+
+  onProjectEdit(id: number) {
+    console.log('project edit id', id);
+    this.router.navigate(['/project/edit', id])
+  }
+
+  onProjectDelete(id: number) {
+    console.log('project delete id', id);
+    const result = this.projectService.deleteProject(id);
+    if (result) {
+      this.fetchProjectsFromStorage();
+    }
+  }
+
+  onCreateProject() {
+    this.router.navigate(['/project/create']);
   }
 }

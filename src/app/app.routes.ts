@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'projects',
-    loadComponent: () => import('./projects/projects').then((m) => m.Projects),
+    loadComponent: () => import('./projects/project-list/project-list').then((m) => m.ProjectList),
     canActivate: [authGuard],
   },
   {
@@ -38,12 +38,14 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'project/view',
-    loadComponent: () => import('./projects/project-details/project-details').then((m) => m.ProjectDetails)
+    path: 'project/view/:id',
+    loadComponent: () => import('./projects/project-details/project-details').then((m) => m.ProjectDetails),
+    canActivate: [authGuard],
   },
   {
-    path: 'project/edit',
-    loadComponent:() => import('./projects/project-edit/project-edit').then((m) => m.ProjectEdit)
+    path: 'project/edit/:id',
+    loadComponent: () => import('./projects/project-edit/project-edit').then((m) => m.ProjectEdit),
+    canActivate: [authGuard],
   },
   {
     path: '**',

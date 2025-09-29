@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class ProjectService {
-  
+
   createProject(
     name: String,
     description: String,
@@ -21,7 +21,7 @@ export class ProjectService {
       const projectCount = parsedProjectList.length;
 
       const newProject: ProjectData = {
-        id: projectCount + 1,
+        id: Date.now(),
         name: name,
         description: description,
         startDate: startDate,
@@ -39,7 +39,7 @@ export class ProjectService {
     } else {
       var projectList: ProjectData[] = [];
       var projectDetails: ProjectData = {
-        id: 1,
+        id: Date.now(),
         name: name,
         description: description,
         startDate: startDate,
@@ -50,7 +50,7 @@ export class ProjectService {
     }
   }
 
-  fetchProject(): ProjectData[] {
+  fetchAllProjects(): ProjectData[] {
     const data = localStorage.getItem('projectsDataKey');
     if (data != null) {
       const parsedJson: ProjectData[] = JSON.parse(data);
@@ -60,10 +60,58 @@ export class ProjectService {
       return [];
     }
   }
+
+  updateProject(id: number, name: String, description: String, startDate: String, endDate: String) {
+    const data = localStorage.getItem('projectsDataKey');
+    if (data != null) {
+      var parsedJson: ProjectData[] = JSON.parse(data);
+      var project = parsedJson.findIndex(project => project.id === id);
+      if (project !== -1) {
+        parsedJson[project].name = name;
+        parsedJson[project].description = description;
+        parsedJson[project].startDate = startDate;
+        parsedJson[project].endDate = endDate;
+      }
+
+      localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
+    }
+  }
+
+  getProjectById(id: number): ProjectData {
+    const data = localStorage.getItem('projectsDataKey');
+    console.log('Project Data', data);
+    if (data != null) {
+      const parsedJson: ProjectData[] = JSON.parse(data);
+      console.log('Parsed Project Data', parsedJson);
+      const project = parsedJson.find(p => p.id === id);
+      if (project) {
+        return project;
+      } else {
+        return { id: 0, name: '', description: '', startDate: '', endDate: '' };
+      }
+    } else {
+      return { id: 0, name: '', description: '', startDate: '', endDate: '' };
+    }
+  }
+
+  deleteProject(id: number): boolean {
+    const data = localStorage.getItem('projectsDataKey');
+    if (data != null) {
+      var parsedJson: ProjectData[] = JSON.parse(data);
+      const index = parsedJson.findIndex(project => project.id === id);
+      if (index !== -1) {
+        parsedJson.splice(index, 1);
+      }
+      localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 export interface ProjectData {
-  id: Number;
+  id: number;
   name: String;
   description: String;
   startDate: String;
