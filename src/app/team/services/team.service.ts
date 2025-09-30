@@ -22,6 +22,7 @@ export class TeamService {
         if (teamMembers != null) {
             const parsedTeamMembers: TeamMember[] = JSON.parse(teamMembers);
             const newTeamMember: TeamMember = {
+                employeeId: Math.floor(Math.random() * 1000000),
                 name: name,
                 email: email,
                 role: role,
@@ -31,6 +32,7 @@ export class TeamService {
         } else {
             const teamMembers: TeamMember[] = [];
             const newTeamMember: TeamMember = {
+                employeeId: Math.floor(Math.random() * 1000000),
                 name: name,
                 email: email,
                 role: role,

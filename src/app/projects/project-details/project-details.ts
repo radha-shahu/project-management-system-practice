@@ -8,6 +8,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fa0, faCircleInfo, faClock, faPenToSquare, faTrash, faUserPlus, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectData, ProjectService } from '../../core/services/project.service';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { TeamMember } from '../../team/team-list/team-list';
+import { CommonModule } from '@angular/common';
+import { MatInputModule } from "@angular/material/input";
 library.add(faClock, faCircleInfo, faUsers, faUserPlus, faPenToSquare, faTrash)
 @Component({
   selector: 'app-project-details',
@@ -16,7 +20,10 @@ library.add(faClock, faCircleInfo, faUsers, faUserPlus, faPenToSquare, faTrash)
     SidebarComponent,
     MatButtonModule,
     MatCardModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatTableModule,
+    CommonModule,
+    MatInputModule
   ],
   templateUrl: './project-details.html',
   styleUrl: './project-details.scss'
@@ -34,6 +41,9 @@ export class ProjectDetails {
   projectDescription: String = '';
   projectStartDate: String = '';
   projectEndDate: String = '';
+  teamColumns: string[] = ['name', 'role'];
+  teamMembers: TeamMember[] = [];
+  dataSource = new MatTableDataSource(this.teamMembers);
   constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService) {
 
   }
@@ -48,6 +58,8 @@ export class ProjectDetails {
       this.projectDescription = this.projectData.description;
       this.projectStartDate = this.projectData.startDate;
       this.projectEndDate = this.projectData.endDate;
+      this.teamMembers = this.projectData.teamMembers;
+      this.dataSource.data = this.teamMembers;
     }
   }
 
@@ -60,6 +72,11 @@ export class ProjectDetails {
     this.router.navigate(['/project/edit', id])
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   onProjectDelete(id: number) {
     console.log('project delete id', id);
     const result = this.projectService.deleteProject(id);
@@ -68,7 +85,7 @@ export class ProjectDetails {
     }
   }
 
-  onAddTeamMember(){
-    this.router.navigate(['/team/assign']);
+  onManageTeam() {
+    this.router.navigate(['/team/assign', this.projectId]);
   }
 }

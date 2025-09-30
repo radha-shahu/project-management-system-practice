@@ -108,7 +108,8 @@ export class ProjectEdit implements OnInit {
       projectName,
       projectDescription,
       formattedStartDate,
-      formattedEndDate
+      formattedEndDate,
+      []
     );
     this.router.navigate(['/projects']);
   }

@@ -58,8 +58,8 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
-    path: 'team/assign',
-    loadComponent: () => import('./team/assign-team/assign-team').then((m) =>m.AssignTeam),
+    path: 'team/assign/:id',
+    loadComponent: () => import('./team/assign-team/assign-team').then((m) => m.AssignTeam),
     canActivate: [authGuard]
   },
   {

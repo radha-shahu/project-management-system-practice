@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { TeamMember } from '../../team/team-list/team-list';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,7 @@ export class ProjectService {
         description: description,
         startDate: startDate,
         endDate: endDate,
+        teamMembers: [],
       };
       console.log('New Project details', newProject);
 
@@ -44,6 +46,7 @@ export class ProjectService {
         description: description,
         startDate: startDate,
         endDate: endDate,
+        teamMembers: [],
       };
       projectList.push(projectDetails);
       localStorage.setItem('projectsDataKey', JSON.stringify(projectList));
@@ -61,7 +64,7 @@ export class ProjectService {
     }
   }
 
-  updateProject(id: number, name: String, description: String, startDate: String, endDate: String) {
+  updateProject(id: number, name: String, description: String, startDate: String, endDate: String, teamMembers: TeamMember[]) {
     const data = localStorage.getItem('projectsDataKey');
     if (data != null) {
       var parsedJson: ProjectData[] = JSON.parse(data);
@@ -71,10 +74,24 @@ export class ProjectService {
         parsedJson[project].description = description;
         parsedJson[project].startDate = startDate;
         parsedJson[project].endDate = endDate;
+        parsedJson[project].teamMembers = teamMembers;
       }
 
       localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
     }
+  }
+
+  updateProjectTeamMembers(id: number, teamMembers: TeamMember[]) {
+    const data = localStorage.getItem('projectsDataKey');
+    if (data != null) {
+      var parsedJson: ProjectData[] = JSON.parse(data);
+      var index = parsedJson.findIndex(project => project.id === id);
+      if (index !== -1) {
+        parsedJson[index].teamMembers = teamMembers;
+      }
+      localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
+    }
+
   }
 
   getProjectById(id: number): ProjectData {
@@ -87,10 +104,10 @@ export class ProjectService {
       if (project) {
         return project;
       } else {
-        return { id: 0, name: '', description: '', startDate: '', endDate: '' };
+        return { id: 0, name: '', description: '', startDate: '', endDate: '', teamMembers: [] };
       }
     } else {
-      return { id: 0, name: '', description: '', startDate: '', endDate: '' };
+      return { id: 0, name: '', description: '', startDate: '', endDate: '', teamMembers: [] };
     }
   }
 
@@ -116,4 +133,5 @@ export interface ProjectData {
   description: String;
   startDate: String;
   endDate: String;
+  teamMembers: TeamMember[];
 }
