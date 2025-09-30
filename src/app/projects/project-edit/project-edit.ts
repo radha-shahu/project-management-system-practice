@@ -5,6 +5,7 @@ import {
   ReactiveFormsModule,
   FormBuilder,
   Validators,
+  MinLengthValidator,
 } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -19,6 +20,7 @@ import { HeaderComponent } from '../../shared/header-component/header-component'
 import { SidebarComponent } from '../../shared/sidebar-component/sidebar-component';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
+import { minDateGapValidator } from '../../validators/min-date-gap-validator';
 
 @Component({
   selector: 'app-project-edit',
@@ -47,7 +49,8 @@ export class ProjectEdit implements OnInit {
     private projectService: ProjectService,
     private datePipe: DatePipe,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    // private validator: MinLengthValidator
   ) {
     this.projectForm = this.fb.group({
       projectName: [
@@ -61,7 +64,10 @@ export class ProjectEdit implements OnInit {
       description: ['', []],
       startDate: ['', [Validators.required]],
       endDate: ['', [Validators.required]],
-    });
+    },
+  {
+    validator: minDateGapValidator(2),
+  });
   }
 
   ngOnInit() {

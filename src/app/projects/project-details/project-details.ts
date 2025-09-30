@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { HeaderComponent } from "../../shared/header-component/header-component";
 import { SidebarComponent } from "../../shared/sidebar-component/sidebar-component";
 import { MatButtonModule } from '@angular/material/button';
@@ -12,6 +12,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { TeamMember } from '../../team/team-list/team-list';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from "@angular/material/input";
+import { MatSort, MatSortModule } from '@angular/material/sort';
 library.add(faClock, faCircleInfo, faUsers, faUserPlus, faPenToSquare, faTrash)
 @Component({
   selector: 'app-project-details',
@@ -23,8 +24,9 @@ library.add(faClock, faCircleInfo, faUsers, faUserPlus, faPenToSquare, faTrash)
     FontAwesomeModule,
     MatTableModule,
     CommonModule,
-    MatInputModule
-  ],
+    MatInputModule,
+    MatSortModule
+],
   templateUrl: './project-details.html',
   styleUrl: './project-details.scss'
 })
@@ -35,6 +37,7 @@ export class ProjectDetails {
   faUserPlus = faUserPlus;
   faPenToSquare = faPenToSquare;
   faTrash = faTrash;
+  @ViewChild(MatSort) sort!: MatSort;
   projectId: number = 0;
   projectData: ProjectData | null = null;
   projectName: String = '';
@@ -76,7 +79,9 @@ export class ProjectDetails {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
+  ngAfterViewInit(){
+    this.dataSource.sort = this.sort;
+  }
   onProjectDelete(id: number) {
     console.log('project delete id', id);
     const result = this.projectService.deleteProject(id);

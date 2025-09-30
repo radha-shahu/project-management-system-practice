@@ -19,7 +19,7 @@
                 <mat-label>Project Name </mat-label>
                 <input matInput placeholder="Enter project name" formControlName="projectName" />
 
-                <mat-error *ngIf="
+                <mat-error class="error-message" *ngIf="
                     projectForm.get('projectName')?.invalid &&
                     projectForm.get('projectName')?.touched
                   ">
@@ -59,7 +59,7 @@
                     formControlName="startDate" />
                   <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                   <mat-datepicker #startPicker></mat-datepicker>
-                  <mat-error *ngIf="
+                  <mat-error class="error-message" *ngIf="
                       projectForm.get('startDate')?.invalid &&
                       projectForm.get('startDate')?.touched
                     ">
@@ -76,19 +76,18 @@
                   <input matInput [matDatepicker]="endPicker" placeholder="Select end date" formControlName="endDate" />
                   <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                   <mat-datepicker #endPicker></mat-datepicker>
-                  <mat-error *ngIf="
+                  <mat-error class="error-message" *ngIf="
                       projectForm.get('endDate')?.invalid &&
                       projectForm.get('endDate')?.touched
                     ">
                     <div *ngIf="projectForm.get('endDate')?.errors?.['required']">Please Enter End Date</div>
-                    <!-- <div *ngIf="projectForm.errors?.['minDateGapValidator']"> End date must be at least 2 days after the start date.</div> -->
                   </mat-error>
                 </mat-form-field>
               </div>
 
             </div>
-            <div *ngIf="projectForm.errors?.['minDateGap'] && (projectForm.dirty || projectForm.touched)">
-              ❌ End date must be at least 2 days after the start date.
+            <div class="error-message" *ngIf="projectForm.errors?.['minDateGap'] && (projectForm.dirty || projectForm.touched)">
+               End date must be at least 2 days after the start date.
             </div>
           </div>
           <!-- Action Buttons -->

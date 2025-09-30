@@ -4,16 +4,17 @@ import { SidebarComponent } from '../../shared/sidebar-component/sidebar-compone
 import { TeamService } from '../services/team.service';
 import { TeamMember } from '../team-list/team-list';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProjectService } from '../../core/services/project.service';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-assign-team',
-  imports: [HeaderComponent, SidebarComponent, MatTableModule, MatCheckboxModule],
+  imports: [HeaderComponent, SidebarComponent, MatTableModule, MatCheckboxModule,MatButtonModule, MatSortModule],
   templateUrl: './assign-team.html',
   styleUrl: './assign-team.scss',
 })

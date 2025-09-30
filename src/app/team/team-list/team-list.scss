@@ -1,7 +1,4 @@
-table {
-        width: 100%;
-    margin-top: 26px;
-}
+
 
 th.mat-sort-header-sorted {
     color: black;
@@ -101,4 +98,16 @@ th.mat-sort-header-sorted {
   font-size: 15px;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+table {
+  width: 100%;
+}
+
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+.form-field{
+        margin-top: 26px;
 }

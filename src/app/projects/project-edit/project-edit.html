@@ -19,7 +19,7 @@
                                 <mat-label>Project Name </mat-label>
                                 <input matInput placeholder="Enter project name" formControlName="projectName" />
 
-                                <mat-error *ngIf="
+                                <mat-error class="error-message" *ngIf="
                     projectForm.get('projectName')?.invalid &&
                     projectForm.get('projectName')?.touched
                   ">
@@ -56,7 +56,7 @@
                                         formControlName="startDate" />
                                     <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
                                     <mat-datepicker #startPicker></mat-datepicker>
-                                    <mat-error *ngIf="
+                                    <mat-error class="error-message" *ngIf="
                       projectForm.get('startDate')?.invalid &&
                       projectForm.get('startDate')?.touched
                     ">
@@ -74,7 +74,7 @@
                                         formControlName="endDate" />
                                     <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
                                     <mat-datepicker #endPicker></mat-datepicker>
-                                    <mat-error *ngIf="
+                                    <mat-error class="error-message" *ngIf="
                       projectForm.get('endDate')?.invalid &&
                       projectForm.get('endDate')?.touched
                     ">
@@ -85,6 +85,9 @@
                                 </mat-form-field>
                             </div>
                         </div>
+                        <div class="error-message" *ngIf="projectForm.errors?.['minDateGap'] && (projectForm.dirty || projectForm.touched)">
+               End date must be at least 2 days after the start date.
+            </div>
                     </div>
                     <!-- Action Buttons -->
                     <div class="form-actions">

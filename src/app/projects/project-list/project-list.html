@@ -10,7 +10,12 @@
           <h1 class="projects-title">Projects</h1>
           <p class="projects-subtitle">Manage and track your projects</p>
         </div>
-        <button mat-raised-button color="primary" class="create-button" (click)="onCreateProject()">
+        <button
+          mat-raised-button
+          color="primary"
+          class="create-button"
+          (click)="onCreateProject()"
+        >
           Create New Project
         </button>
       </div>
@@ -24,19 +29,32 @@
             You haven't created any projects yet. Start by creating your first
             project to begin managing your work.
           </p>
-          <button mat-raised-button color="primary" class="create-first-button" (click)="onCreateProject()">
+          <button
+            mat-raised-button
+            color="primary"
+            class="create-first-button"
+            (click)="onCreateProject()"
+          >
             Create Your First Project
           </button>
         </div>
       </ng-template>
     </div>
 
-    <div *ngIf="childProjectList.length > 0; else noProjects" class="table-layout">
+    <div
+      *ngIf="childProjectList.length > 0; else noProjects"
+      class="table-layout"
+    >
       <!-------------Filter Input-------------->
       <div class="form-field">
         <mat-form-field appearance="outline" class="half-width">
           <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="search here" #input />
+          <input
+            matInput
+            (keyup)="applyFilter($event)"
+            placeholder="search here"
+            #input
+          />
           <!-- <fa-icon [icon]=" faMagnifyingGlass"></fa-icon> -->
         </mat-form-field>
 
@@ -50,16 +68,23 @@
         </mat-form-field>
       </div>
       <!----------------Project List Table------------------->
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        class="mat-elevation-z8"
+        matSort
+      >
         <!--No.Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+          <th mat-header-cell *matHeaderCellDef>Project Id</th>
           <td mat-cell *matCellDef="let element">{{ element.id }}</td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Project Name</th>
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Project Name
+          </th>
           <td mat-cell *matCellDef="let element">{{ element.name }}</td>
         </ng-container>
 
@@ -91,13 +116,26 @@
         <ng-container matColumnDef="action">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Action</th>
           <td mat-cell *matCellDef="let element">
-            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
-            <fa-icon [icon]="faEye" (click)="onProjectView(element.id)"></fa-icon>
-            <fa-icon [icon]="faPen" (click)="onProjectEdit(element.id)"></fa-icon>
-            <fa-icon [icon]="faTrash" (click)="onProjectDelete(element.id)"></fa-icon>
+            <!-- <fa-icon [icon]="faEllipsisVertical"></fa-icon> -->
+            <fa-icon
+              [icon]="faEye"
+              (click)="onProjectView(element.id)"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faPen"
+              (click)="onProjectEdit(element.id)"
+            ></fa-icon>
+            <fa-icon
+              [icon]="faTrash"
+              (click)="onProjectDelete(element.id)"
+            ></fa-icon>
           </td>
         </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+        <tr
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+          class="header-row"
+        ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 
         <!-- Row shown when there is no matching data. -->
@@ -107,9 +145,12 @@
           </td>
         </tr>
       </table>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements">
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 20]"
+        showFirstLastButtons
+        aria-label="Select page of periodic elements"
+      >
       </mat-paginator>
     </div>
-
   </main>
 </div>
