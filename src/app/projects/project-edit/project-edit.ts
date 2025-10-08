@@ -117,10 +117,10 @@ export class ProjectEdit implements OnInit {
       formattedEndDate,
       []
     );
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/project/list']);
   }
 
   onCancel() {
-    this.router.navigate(['/projects']);
+    this.router.navigate(['/project/list']);
   }
 }

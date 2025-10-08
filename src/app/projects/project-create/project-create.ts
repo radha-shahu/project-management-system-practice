@@ -87,7 +87,7 @@ export class ProjectCreate {
       formattedStartDate,
       formattedEndDate
     );
-    this.router.navigate(['/projects'])
+    this.router.navigate(['/project/list'])
   }
 
   onCancel() {

@@ -19,9 +19,9 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = this.fb.group({
-      email: ['admin@a.com', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email]],
       password: [
-        'Admin@12',
+        '',
         [
           Validators.required,
           Validators.pattern(
@@ -33,10 +33,10 @@ export class LoginComponent {
   }
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log('Login successfull', this.loginForm.value);
+      console.log('Form values', this.loginForm.value);
       this.authService.login(
         this.loginForm.get('email')?.value,
-        this.loginForm.get('password')?.value
+        this.loginForm.get('password')?.value,
       );
     } else {
       console.log('Login failed');

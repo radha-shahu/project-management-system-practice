@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TeamMember } from '../../team/team-list/team-list';
+import { faL } from '@fortawesome/free-solid-svg-icons';
 
 @Injectable({
   providedIn: 'root',
@@ -68,13 +69,13 @@ export class ProjectService {
     const data = localStorage.getItem('projectsDataKey');
     if (data != null) {
       var parsedJson: ProjectData[] = JSON.parse(data);
-      var project = parsedJson.findIndex(project => project.id === id);
-      if (project !== -1) {
-        parsedJson[project].name = name;
-        parsedJson[project].description = description;
-        parsedJson[project].startDate = startDate;
-        parsedJson[project].endDate = endDate;
-        parsedJson[project].teamMembers = teamMembers;
+      var projectIndex = parsedJson.findIndex(project => project.id === id);
+      if (projectIndex !== -1) {
+        parsedJson[projectIndex].name = name;
+        parsedJson[projectIndex].description = description;
+        parsedJson[projectIndex].startDate = startDate;
+        parsedJson[projectIndex].endDate = endDate;
+        parsedJson[projectIndex].teamMembers = teamMembers;
       }
 
       localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
@@ -87,7 +88,8 @@ export class ProjectService {
       var parsedJson: ProjectData[] = JSON.parse(data);
       var index = parsedJson.findIndex(project => project.id === id);
       if (index !== -1) {
-        parsedJson[index].teamMembers = teamMembers;
+        var projectAtIndex = parsedJson[index];
+        projectAtIndex.teamMembers = teamMembers;
       }
       localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
     }
@@ -115,23 +117,26 @@ export class ProjectService {
     const data = localStorage.getItem('projectsDataKey');
     if (data != null) {
       var parsedJson: ProjectData[] = JSON.parse(data);
-      const index = parsedJson.findIndex(project => project.id === id);
+      const index = parsedJson.findIndex(x => x.id === id);
       if (index !== -1) {
         parsedJson.splice(index, 1);
+        localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
+        return true;
+      } else {
+        return false;
       }
-      localStorage.setItem('projectsDataKey', JSON.stringify(parsedJson));
-      return true;
     } else {
       return false;
     }
   }
 }
 
-export interface ProjectData {
-  id: number;
-  name: String;
-  description: String;
-  startDate: String;
-  endDate: String;
-  teamMembers: TeamMember[];
+export class ProjectData {
+  id: number = 0;
+  name: String='';
+  description: String='';
+  startDate: String='';
+  endDate: String='';
+  teamMembers: TeamMember[]=[];
 }
+

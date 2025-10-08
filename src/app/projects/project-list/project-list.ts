@@ -53,7 +53,7 @@ export class ProjectList {
   faTrash = faTrash;
   faMagnifyingGlass = faMagnifyingGlass;
   faEllipsisVertical = faEllipsisVertical
-  childProjectList: ProjectData[] = [];
+  tableProjectList: ProjectData[] = [];
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   statusOptions = ['All Status', 'Active', 'Completed'];
@@ -68,17 +68,17 @@ export class ProjectList {
     'action'
   ];
 
-  dataSource = new MatTableDataSource(this.childProjectList);
+  dataSource = new MatTableDataSource(this.tableProjectList);
 
   ngOnInit() {
     this.fetchProjectsFromStorage();
   }
 
   fetchProjectsFromStorage() {
-    this.childProjectList = this.projectService.fetchAllProjects();
-    console.log('fetched prj details', this.childProjectList);
-    this.dataSource.data = this.childProjectList;
-    console.log('fetched prj details', this.dataSource.data);
+    this.tableProjectList = this.projectService.fetchAllProjects();
+    console.log('fetched prj details', this.tableProjectList);
+    this.dataSource.data = this.tableProjectList;
+    
   }
 
   applyFilter(event: Event) {

@@ -18,11 +18,11 @@ export const routes: Routes = [
       ),
     canActivate: [authGuard],
   },
-  {
-    path: 'projects',
-    loadComponent: () => import('./projects/project-list/project-list').then((m) => m.ProjectList),
-    canActivate: [authGuard],
-  },
+  // {
+  //   path: 'projects',
+  //   loadComponent: () => import('./projects/project-list/project-list').then((m) => m.ProjectList),
+  //   canActivate: [authGuard],
+  // },
   {
     path: 'project/create',
     loadComponent: () =>
@@ -59,7 +59,7 @@ export const routes: Routes = [
   },
   {
     path: 'team/assign/:id',
-    loadComponent: () => import('./team/assign-team/assign-team').then((m) => m.AssignTeam),
+    loadComponent: () => import('./team/project-team-member-assign/assign-team').then((m) => m.AssignTeam),
     canActivate: [authGuard]
   },
   {

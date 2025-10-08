@@ -67,7 +67,7 @@ export class ProjectDetails {
   }
 
   onBackToList() {
-    this.router.navigate(['/projects'])
+    this.router.navigate(['/project/list'])
   }
 
   onProjectEdit(id: number) {
@@ -86,7 +86,7 @@ export class ProjectDetails {
     console.log('project delete id', id);
     const result = this.projectService.deleteProject(id);
     if (result) {
-      this.router.navigate(['/projects'])
+      this.router.navigate(['/project/list'])
     }
   }
 
